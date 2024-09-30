@@ -1,0 +1,46 @@
+{% extends 'dashboard/index.html' %}
+
+{% block title %}
+    {{ income_page.title }}
+{% endblock %}
+
+{% block content %}
+
+<header class="row">
+    <div class="d-flex mt-3 mb-4 align-items-center">
+        <a href="{% url 'income_manage' %}" class="btn btn-outline-primary mb-3 me-4 mt-2 d-block"><i class="ti ti-settings"></i></a>
+        <h1 class="m-0 pb-2">{{ income_page.h1 }}</h1>
+    </div>
+    <div class="col-auto">
+        <h3>{{ income_page.total_income }}: <span class="text-success">{% if total_income %}{{ total_income }}${% else %}0${% endif %}</span></h3>
+        <h3>{{ income_page.total_additional_income }}: <span class="text-success">{% if total_additional_incomes %}{{ total_additional_incomes }}${% else %}0${% endif %}</span></h3>
+        <h3>{{ income_page.total_one_time_income }}: <span class="text-success">{% if total_one_time_incomes %}{{ total_one_time_incomes }}${% else %}0${% endif %}</span></h3>
+    </div>
+</header>
+
+<div class="row flex-grow-1">
+
+    <div class="col-lg-12 mt-4 md-4">
+        <div class="row">
+            <div class="col-lg-8">
+                {% include 'include/transaction-income.html' %}
+            </div>
+            <div class="col-lg-4">
+                {% include 'include/montlyearning.html' with name_id='one_time' title=income_page.w.one_time_income data_charts='[25, 16, 20, 40, 22, 68, 30]' %} 
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block 'charts_data' %}
+  <script>  
+    jQuery(document).ready(function() {
+      charts( 'one_time', '#13deb978', 'Earnings' );
+      charts( 'additional', '#13deb978', 'Earnings' );
+    }); 
+</script>
+
+{% endblock %}

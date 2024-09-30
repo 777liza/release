@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Policy Page
+{% endblock %}
+
+{% block main %}
+
+<div class="row justify-content-center w-100">
+  <div class="col-lg-12">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      color: #333;
+      border-bottom: 2px solid #f4f4f4;
+      padding-bottom: 10px;
+    }
+    p {
+      line-height: 1.6;
+      color: #666;
+    }
+    ul {
+      margin-left: 20px;
+      color: #666;
+    }
+    a {
+      color: #007BFF;
+    }
+  </style>
+
+  <div class="container">
+    <h2>Terms of Use</h2>
+    <p><strong>Effective Date:</strong> [Insert Date]</p>
+
+    <p>Welcome to Budget Tracker Website . By accessing or using our website, you agree to comply with and be bound by the following terms and conditions of use. Please review the following terms carefully. If you do not agree with these terms, you should not use our website.</p>
+
+    <h3>1. Use of the Website</h3>
+    <p>You agree to use the website for personal, non-commercial purposes only. You must not use the website for any illegal or unauthorized purpose, including but not limited to distributing malware, hacking, or attempting to reverse-engineer any software on the site.</p>
+
+    <h3>2. Account Registration</h3>
+    <p>To access certain features of our budget tracker, you may need to register for an account. You agree to provide accurate and complete information during registration. You are responsible for maintaining the confidentiality of your account login credentials and for all activities that occur under your account.</p>
+
+    <h3>3. User Content</h3>
+    <p>You are responsible for any data or content you upload, input, or store on our website, including but not limited to budget information and financial records. We do not take responsibility for the accuracy, integrity, or legality of your data.</p>
+
+    <h3>4. Data Security</h3>
+    <p>We implement reasonable security measures to protect your personal data. However, we cannot guarantee the absolute security of your data. You agree to use the website at your own risk and take responsibility for securing your own devices and accounts.</p>
+
+    <h3>5. Privacy Policy</h3>
+    <p>Your use of our website is also governed by our <a href="{% url 'policy' %}">Privacy Policy</a>
+      . Please review it to understand how we collect, use, and protect your personal information.</p>
+
+    <h3>6. Third-Party Links</h3>
+    <p>Our website may contain links to third-party websites or services that are not owned or controlled by us. We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party websites or services.</p>
+
+    <h3>7. Termination of Use</h3>
+    <p>We reserve the right to suspend or terminate your access to our website at any time, without notice, for any conduct that we, in our sole discretion, believe is in violation of these terms or any applicable law or is harmful to the interests of another user or third party.</p>
+
+    <h3>8. Limitation of Liability</h3>
+    <p>To the fullest extent permitted by law, we will not be liable for any direct, indirect, incidental, or consequential damages arising from your use of the website or inability to use the website. This includes but is not limited to any errors, interruptions, or delays in service.</p>
+
+    <h3>9. Changes to Terms</h3>
+    <p>We reserve the right to modify these Terms of Use at any time. Any changes will be effective immediately upon posting on the website. Your continued use of the website following any such modifications constitutes your acceptance of the new terms.</p>
+
+    <h3>10. Contact Information</h3>
+    <p>If you have any questions or concerns about these terms, please contact us at:</p>
+    <p><strong>Email:</strong> [your email address]</p>
+    <p><strong>Address:</strong> [your physical address]</p>
+  </div>
+
+
+</div>
+</div>
+
+{% endblock %}

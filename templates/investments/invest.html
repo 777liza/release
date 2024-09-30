@@ -1,0 +1,45 @@
+{%extends 'dashboard/index.html'%}
+
+{% block title %}
+    {{ investments_page.title }}
+{% endblock %}
+
+{% block content %}
+
+<header class="row">
+    <div class="d-flex mt-3 mb-4 align-items-center">
+        <a href="{% url 'invest_manage' %}" class="btn btn-outline-primary mb-3 me-4 mt-2 d-block"><i class="ti ti-settings"></i></a>
+        <h1 class="m-0 pb-2">{{ investments_page.h1 }}</h1>
+    </div>
+    <div class="col-auto">
+        <h3>{{ investments_page.total_investments }}:<span class="text-success">{% if total_income %}{{ total_income }}${% else %}0${% endif %}</span></h3>
+        <h3>{{ investments_page.total_margin }}: <span class="text-success">{% if total_income %}{{ total_income }}${% else %}0${% endif %}</span></h3>
+    </div>
+</header>
+
+<div class="row flex-grow-1">
+
+    <div class="col-lg-12 mt-4 md-4">
+        <div class="row">
+            <div class="col-lg-8">
+                {% include 'include/transaction-invest.html' with text=investments_page.w %}
+            </div>
+            <div class="col-lg-4">
+                {% include 'include/montlyearning.html' with name_id='investments' title=investments_page.w.margin_investments data_charts='[5, 66, 20, 40, 12, 58, 20]' %}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+
+{% block 'charts_data' %}
+  <script>  
+    jQuery(document).ready(function() {
+        charts( 'investments', '#49beff73', 'Earnings' );
+    }); 
+</script>
+{% endblock %}

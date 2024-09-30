@@ -1,0 +1,47 @@
+
+{% extends 'dashboard/main.html' %}
+
+{% load static %}
+{% block title %}
+{{page_title}}
+{% endblock %}
+{% block main %}
+
+  <!--  Body Wrapper -->
+
+  <div class="page-wrapper dashboard" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <!-- Sidebar Start -->
+
+    {% include 'include/sidebar.html' %}
+
+    <!--  Sidebar End -->
+
+    <!--  Main wrapper -->
+    <div class="body-wrapper">
+
+      <!--  Header Start -->
+
+      {% include 'include/header.html' %}
+
+      <!--  Header End -->
+
+      <div class="container-fluid d-flex flex-column min-vh-100">
+
+        {% block content %}
+
+        {% endblock %}
+
+        {% include 'include/footer.html' %} 
+        
+      </div>
+      
+    </div>
+  
+  </div>
+
+{% endblock %}
+
+{% block charts_data %}
+  
+{% endblock %}

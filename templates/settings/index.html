@@ -1,0 +1,52 @@
+{% extends 'dashboard/index.html' %}
+
+{% block title %}
+    {{ settings_page.title }}
+{% endblock %}
+
+{% block content %}
+
+<header class="row">
+    <div class="d-flex mt-3 mb-4 align-items-center">
+        <span class="btn btn-outline-primary mb-3 me-4 mt-2 d-block"><i class="ti ti-settings"></i></span>
+        <h1 class="m-0 pb-2">{{ settings_page.h1 }} {{ user.username }}</h1>
+    </div>
+</header>
+    <div class="row flex-grow-1">
+        <p>{{ settings_page.date_registration }}: {{ user.date_joined|date:"F j, Y, g:i a" }}</p>
+
+        <form method="post" enctype="multipart/form-data">
+
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label for="avatar" class="form-label">{{ settings_page.avatar }} {{ user.username }}</label>
+                {% if user.avatar %}
+                    <img src="{{ user.avatar.url }}" alt="Current Avatar" class="img-thumbnail mb-3" style="width: 150px;">
+                {% endif %}
+            
+                <input type="file" name="avatar" class="form-control" id="avatar" >
+            </div>
+            <div class="mb-3">
+                <label for="first_name" class="form-label">{{ settings_page.first_name }}</label>
+                <input type="text" name="first_name" class="form-control" id="first_name"  value="{{ form.first_name.value }}">
+            </div>
+            <div class="mb-3">
+                <label for="last_name" class="form-label">{{ settings_page.last_name }}</label>
+                <input type="text" name="last_name" class="form-control" id="last_name"  value="{{ form.last_name.value }}">
+            </div>
+            <div class="form-check mb-3">
+                <input type="checkbox" name="helpful_advice_set" class="form-check-input" id="helpful_advice_set" {% if form.helpful_advice_set.value %}checked{% endif %}>
+                <label for="helpful_advice_set" class="form-check-label">{{ settings_page.helpful_advice }}</label>
+            </div>
+            <div class="form-check mb-3">
+                <input type="checkbox" name="site_theme" class="form-check-input" id="site_theme" {% if form.site_theme.value %}checked{% endif %}>
+                <label for="site_theme" class="form-check-label">{{ settings_page.theme_mode }}</label>
+            </div>
+            <button type="submit" class="btn btn-primary">{{ settings_page.btn.save_settings }}</button>
+            
+        </form>
+
+    </div>
+    
+{% endblock %}

@@ -1,0 +1,174 @@
+.finance .btn[data-bs-toggle="modal"] {
+    padding: 4px 7px;
+    font-size: 13px;
+}
+
+.finance .bg-success {
+    background: #4fd982;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 4px 7px 7px 7px;
+}
+
+.finance .text-success {
+    color :#4fd982;
+    font-weight: 600;
+}
+
+/* .income-text label {
+    color: #4fd982;
+} */
+
+.income-input input {
+    background: rgba(79, 217, 130, 0.5);
+}
+
+/* .expenses-text label {
+    color: #d94f4f;
+} */
+
+.expenses-input input {
+    background: rgba(217, 79, 79, 0.5);
+}
+/* .modal-body{
+    padding: 20px;
+    background-color: #d94f4f; /* Красный цвет фона 
+    color: white;
+    text-align: center;  Центрирует содержимое внутри алерта 
+    position: relative;
+    border-radius: 5px;
+}  */ 
+
+.background-expneces {
+    padding: 0;
+}
+
+.background-expneces h5 {
+    background-color: #fbbfbf; /* ещё один пример цвета фона */
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+}
+
+.background-income {
+    padding: 0;
+}
+
+.background-invest {
+    padding: 0;
+}
+
+.background-income  h5 {
+    background-color: #13deb978;
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+}
+
+.background-invest  h5 {
+    background-color: #49beff73;
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+}
+
+div[data-type='one_time'] .bg-secondary,
+div[data-type='additional'] .bg-secondary {
+    background-color: #1adbb853 !important;
+    border: 2px solid #119b8253 ;
+}
+
+div[data-type='expences'] .bg-secondary,
+div[data-type='additional_expences'] .bg-secondary {
+    background-color: #fbbfbf  !important;
+    border: 2px solid#f86f6fd1 ;
+}
+div[data-type='investments-actives'] .bg-secondary,
+div[data-type='investments'] .bg-secondary {
+    background-color: #3db6f753!important;
+    border: 2px solid #1d7aac56 ;
+}
+
+.about-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 50px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.about-container h1 {
+    font-size: 48px;
+    color: #4830F0;
+    margin-bottom: 20px;
+}
+
+.about-container p {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.about-container .highlight {
+    color: #13deb9;
+    font-weight: bold;
+}
+
+.benefits {
+    background-color: #88aee2;
+    padding: 40px 0;
+    color: white;
+}
+
+.benefits h3 {
+    font-size: 42px;
+    margin-bottom: 30px;
+}
+
+.benefits p {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+span.btn {
+    cursor: default
+}
+
+span.btn:hover {
+    background: inherit;
+    color: inherit;
+}
+
+.footer-content a:hover {
+    color: var(--bs-indigo)
+}
+
+.footer {
+    background: #7e7777;
+    padding: 40px 15px;
+    color: white;
+    text-align: center;
+}
+
+.footer a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: #5d87ff;
+}
+
+@media (max-width: 768px) {
+    .about-container {
+        padding: 30px;
+    }
+
+    .about-container h1 {
+        font-size: 36px;
+    }
+
+    .benefits h3 {
+        font-size: 32px;
+    }
+}

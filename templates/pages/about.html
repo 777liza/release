@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    About Us - Budget Tracker
+{% endblock %}
+
+{% block header %}
+<style>
+    .app-header{
+        position: fixed;
+    }
+    .about-container {
+        max-width: 900px;
+        margin: 120px auto;
+        padding: 50px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .about-container h1 {
+        font-size: 48px;
+        color: #7363e2;
+        margin-bottom: 20px;
+    }
+
+    .app-header .nmx-3 {
+        margin: 0 1em
+    }
+
+    .about-container p {
+        font-size: 18px;
+        line-height: 1.7;
+        color: #555;
+        margin-bottom: 30px;
+    }
+
+    .about-container .highlight {
+        color: #13deb9;
+        font-weight: bold;
+    }
+
+    .benefits {
+        background-color: #88aee2;
+        padding: 40px 10px;
+        margin-bottom: 30px;
+        color: white;
+    }
+
+    .benefits h3 {
+        font-size: 42px;
+        margin-bottom: 30px;
+        color: white;
+    }
+
+    .benefits p {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    .footer {
+        background: #7e7777;
+        padding: 40px 15px;
+        color: white;
+        text-align: center;
+    }
+
+    .footer a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    .footer a:hover {
+        color: #5d87ff;
+    }
+
+    .app-header.small{
+        padding: 5px 25px;
+    }
+
+    .app-header.small img{
+        width: 150px;
+    }
+    @media (max-width: 768px) {
+        .about-container {
+            padding: 30px;
+        }
+
+        .about-container h1 {
+            font-size: 36px;
+        }
+
+        .benefits h3 {
+            font-size: 32px;
+        }
+    }
+
+    @media screen and (max-width: 480px){
+        .app-header,
+        .app-header.small {
+            padding: 5px 0;
+        }
+        .app-header.small .navbar {
+            min-height: 60px;
+        }
+        .app-header img {
+            width: 140px;
+        }
+        .app-header.small img {
+            width: 120px;
+        }
+        .app-header .nmx-3 {
+            margin: 0 0.5em
+        }
+        .first-block
+        {
+            padding-top: 80%;
+            height: 800px;
+        }  
+        .first-block h1 {
+            font-size: 48px;
+        }
+    }
+
+</style>
+
+<header class="app-header shadow ">
+                        
+    <div class="row ">
+        <div class="col-lg-12 col-md-12 d-flex justify-content-between align-items-center">
+            <a href="{% url 'home_page' %}"><img src="{% static '/svg/logo.svg' %}"  width="180" alt="" class="ml-0" /></a>
+        <nav class="navbar row">
+            <ul class="col-lg-12 d-flex justify-content-between align-items-center mb-0">
+
+                <li class="nmx-3">
+                    <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+                </li>
+
+                <li class="nmx-3">
+                    <a href="{% url 'signup' %}" class="btn btn-outline-info text-nowrap">Sign Up</a>
+                </li>
+            </ul>
+        </nav>
+        </div>
+    </div>
+   
+</header>  
+
+{% endblock %}
+
+
+{% block main %}
+
+    <main>
+        <div class="about-container pt-5">
+            <h1>Budget Tracker</h1>
+            <p>
+                <span class="highlight">Budget Tracker</span> is your ultimate tool for managing personal finances. Our platform helps you easily track income, monitor expenses, and optimize investments. With a clear overview of your financial health, you can confidently achieve your financial goals.
+            </p>
+            <p>
+                Whether you are saving for a major purchase or simply want to gain better control of your day-to-day spending, <span class="highlight">Budget Tracker</span> empowers you to make informed financial decisions.
+            </p>
+        </div>
+
+        <div class="benefits text-center">
+            <h3>Why Use Budget Tracker?</h3>
+            <p><strong>Stay Organized:</strong> Manage all your financial data in one place.</p>
+            <p><strong>Save Time:</strong> Automate your income and expense tracking.</p>
+            <p><strong>Achieve Goals:</strong> Set and monitor your financial targets with ease.</p>
+        </div>
+    </main>
+
+{% endblock %}
+
+{% block footer %}
+      <footer class="footer">
+        <p>&copy; BudgetTracker.com 2024</p>
+        <nav>
+            <a href="/about/" class="mx-3">About</a>
+            <a href="/policy/" class="mx-3">Policy</a>
+            <a href="/terms/" class="mx-3">Terms</a>
+            <a href="/contact_us/" class="mx-3">Contact</a>
+        </nav>
+    </footer>
+    <script>
+        $(document).ready(function() {
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 350) {
+                    $('.app-header').addClass('small');
+                } else {
+                    $('.app-header').removeClass('small');
+                }
+            });
+        });
+    </script>
+{% endblock %}

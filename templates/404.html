@@ -1,0 +1,57 @@
+{% load static %}
+{%block content%}
+<head>
+    <title>Page not found</title>
+</head>
+
+<style>
+    /* style.css */
+    body {
+        font-family: 'Montserrat', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #fff;
+        color: #222;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .error-page {
+        text-align: center;
+    }
+
+    .error-page img {
+        max-width: 400px;
+        margin-bottom: 50px;
+    }
+
+    .error-page h1 {
+        font-size: 48px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .error-page p {
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+
+    .btn {
+        background-color: #5D87FF;
+        color: #fff;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+</style>
+
+<div class="error-page">
+    <img src="{% static '/svg/logo.svg' %}" alt="Error 404">
+    <h1>Oops! Page not found.</h1>
+    <p>It looks like you're lost. Try searching for what you need, or go back to the homepage.</p>
+    <a href="/" class="btn">Back to homepage</a>
+</div>
+{% endblock %}

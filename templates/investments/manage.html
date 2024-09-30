@@ -1,0 +1,200 @@
+{% extends 'dashboard/index.html' %}
+
+{% block title %}
+    {{ investments_manage_page.title }}
+{% endblock %}
+
+{% block content %}
+<header class="row">
+    <div class="d-flex mt-3 mb-4 align-items-center">
+        <a href="{% url 'investments' %}" class="btn btn-outline-primary mb-3 me-4 mt-2 d-block"><i class="ti ti-arrow-back"></i></a>
+        <h1 class="m-0 pb-2">{{ investments_manage_page.h1 }}</h1>
+    </div>
+    <div class="col-auto">
+        <h3>{{ investments_manage_page.total_actives }}: <span class="text-success"> {% if total_income %}{{ total_income }}${% else %}0${% endif %}</span></h3>
+        <h3>{{ investments_manage_page.total_margin }}: <span class="text-success"> {% if total_income %}{{ total_income }}${% else %}0${% endif %}</span></h3>
+    </div>
+</header>
+
+<div class="row flex-grow-1">
+
+    <div class="col-lg-12 mt-4 mb-4">
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="row form-group">
+                <div class="mb-3 col-md-4 d-flex align-items-end">
+                    <h4>{{ investments_manage_page.bank_deposit }}</h4>
+                </div>
+                <div class="mb-3 col-md-2">
+                    <label for="bank_deposit" class="form-label">{{ investments_manage_page.amount }}</label>
+                    <div class="input-group">
+                        <input type="number" name="bank_deposit" class="form-control" id="bank_deposit" value="{{ investment.bank_deposit|default_if_none:'' }}">
+                        <span class="input-group-text">$</span>
+                    </div>
+                </div>
+                <div class="mb-3 col-md-2 ">
+                    <label for="bank_deposit_type" class="form-label">{{ investments_manage_page.investment_type }}</label>
+                    <div class="input-group">
+                        <input type="checkbox" name="bank_deposit_type" class="form-check-input" id="bank_deposit_type" {% if investment.bank_deposit_type %}checked{% endif %}>
+                    </div>
+                </div>
+                <div class="mb-3 col-md-2">
+                    <label for="bank_deposit_start_date" class="form-label">{{ investments_manage_page.start_date }}</label>
+                    <div class="input-group">
+                        <input type="date" name="bank_deposit_start_date" class="form-control" id="bank_deposit_start_date" value="{{ investment.bank_deposit_start_date|default_if_none:''|date:'Y-m-d' }}">
+                    </div>
+                </div>
+                <div class="mb-3 col-md-2">
+                    <label for="bank_deposit_end_date" class="form-label">{{ investments_manage_page.end_date}}</label>
+                    <div class="input-group">
+                        <input type="date" name="bank_deposit_end_date" class="form-control" id="bank_deposit_end_date" value="{{ investment.bank_deposit_end_date|default_if_none:''|date:'Y-m-d' }}">
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row form-group">
+                <div class="mb-3 col-md-4 d-flex align-items-end">
+                    <h4>{{ investments_manage_page.stocks }}</h4>
+                </div>
+                <div class="mb-3 col-md-2">
+                    <label for="stocks" class="form-label">{{ investments_manage_page.amount }}</label>
+                    <div class="input-group">
+                        <input type="number" name="stocks" class="form-control" id="stocks" value="{{ investment.stocks|default_if_none:'' }}">
+                        <span class="input-group-text">$</span>
+                    </div>
+                </div>
+                <div class="mb-3 col-md-2">
+                    <label for="stocks_type" class="form-label">{{ investments_manage_page.investment_type }}</label>
+                    <div class="input-group">
+                        <input type="checkbox" name="stocks_type" class="form-check-input" id="stocks_type" {% if investment.stocks_type %}checked{% endif %}>
+                    </div>
+                </div>
+                <div class="mb-3 col-md-2">
+                    <label for="stocks_start_date" class="form-label">{{ investments_manage_page.start_date }}</label>
+                    <div class="input-group">
+                        <input type="date" name="stocks_start_date" class="form-control" id="stocks_start_date" value="{{ investment.stocks_start_date|default_if_none:''|date:'Y-m-d' }}">
+                    </div>
+                </div>
+                <div class="mb-3 col-md-2">
+                    <label for="stocks_end_date" class="form-label">{{ investments_manage_page.end_date }}</label>
+                    <div class="input-group">
+                        <input type="date" name="stocks_end_date" class="form-control" id="stocks_end_date" value="{{ investment.stocks_end_date|default_if_none:''|date:'Y-m-d' }}">
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row form-group d-flex align-items-end">
+                <div class="mb-3 col-md-4">
+                    <h4>{{ investments_manage_page.bonds }}</h4>
+                </div>
+                <div class="mb-3 col-md-2">
+                    <label for="bonds" class="form-label">{{ investments_manage_page.amount }}</label>
+                    <div class="input-group">
+                        <input type="number" name="bonds" class="form-control" id="bonds" value="{{ investment.bonds|default_if_none:'' }}">
+                        <span class="input-group-text">$</span>
+                    </div>
+                </div>
+                <div class="mb-3 col-md-2">
+                    <label for="bonds_type" class="form-label">{{ investments_manage_page.investment_type }}</label>
+                    <div class="input-group">
+                        <input type="checkbox" name="bonds_type" class="form-check-input" id="bonds_type" {% if investment.bonds_type %}checked{% endif %}>
+                    </div>
+                </div>
+                <div class="mb-3 col-md-2">
+                    <label for="bonds_start_date" class="form-label">{{ investments_manage_page.start_date }}</label>
+                    <div class="input-group">
+                        <input type="date" name="bonds_start_date" class="form-control" id="bonds_start_date" value="{{ investment.bonds_start_date|default_if_none:''|date:'Y-m-d' }}">
+                    </div>
+                </div>
+                <div class="mb-3 col-md-2">
+                    <label for="bonds_end_date" class="form-label">{{ investments_manage_page.end_date }}</label>
+                    <div class="input-group">
+                        <input type="date" name="bonds_end_date" class="form-control" id="bonds_end_date" value="{{ investment.bonds_end_date|default_if_none:''|date:'Y-m-d' }}">
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row form-group d-flex align-items-end">
+                <div class="mb-3 col-md-4">
+                    <h4>{{ investments_manage_page.real_estate }}</h4>
+                </div>
+                <div class="mb-3 col-md-2">
+                    <label for="real_estate" class="form-label">{{ investments_manage_page.amount }}</label>
+                    <div class="input-group">
+                        <input type="number" name="real_estate" class="form-control" id="real_estate" value="{{ investment.real_estate|default_if_none:'' }}">
+                        <span class="input-group-text">$</span>
+                    </div>
+                </div>
+
+                <div class="mb-3 col-md-2">
+                    <label for="real_estate_type" class="form-label">{{ investments_manage_page.investment_type }}</label>
+                    <div class="input-group">
+                        <input type="checkbox" name="real_estate_type" class="form-check-input" id="real_estate_type" {% if investment.real_estate_type %}checked{% endif %}>
+                    </div>
+                </div>
+                <div class="mb-3 col-md-2">
+                    <label for="real_estate_start_date" class="form-label">{{ investments_manage_page.start_date }}</label>
+                    <div class="input-group">
+                        <input type="date" name="real_estate_start_date" class="form-control" id="real_estate_start_date" value="{{ investment.real_estate_start_date|default_if_none:''|date:'Y-m-d' }}">
+                    </div>
+                </div>
+                <div class="mb-3 col-md-2">
+                    <label for="real_estate_end_date" class="form-label">{{ investments_manage_page.end_date }}</label>
+                    <div class="input-group">
+                        <input type="date" name="real_estate_end_date" class="form-control" id="real_estate_end_date" value="{{ investment.real_estate_end_date|default_if_none:''|date:'Y-m-d' }}">
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+
+            <div class="row form-group">
+                <div class="mb-3 col-md-4 d-flex align-items-end">
+                    <h4>{{ investments_manage_page.mutual_funds }}</h4>
+                </div>
+                <div class="mb-3 col-md-2">
+                    <label for="mutual_funds" class="form-label">{{ investments_manage_page.amount }}</label>
+                    <div class="input-group">
+                        <input type="number" name="mutual_funds" class="form-control" id="mutual_funds" value="{{ investment.mutual_funds|default_if_none:'' }}">
+                        <span class="input-group-text">$</span>
+                    </div>
+                </div>
+                <div class="mb-3 col-md-2">
+                    <label for="mutual_funds_type" class="form-label">{{ investments_manage_page.investment_type }}</label>
+                    <div class="input-group">
+                        <input type="checkbox" name="mutual_funds_type" class="form-check-input" id="mutual_funds_type" {% if investment.mutual_funds_type %}checked{% endif %}>
+                    </div>
+                </div>
+                <div class="mb-3 col-md-2">
+                    <label for="mutual_funds_start_date" class="form-label">{{ investments_manage_page.start_date }}</label>
+                    <div class="input-group">
+                        <input type="date" name="mutual_funds_start_date" class="form-control" id="mutual_funds_start_date" value="{{ investment.mutual_funds_start_date|default_if_none:''|date:'Y-m-d' }}">
+                    </div>
+                </div>
+                <div class="mb-3 col-md-2">
+                    <label for="mutual_funds_end_date" class="form-label">{{ investments_manage_page.end_date }}</label>
+                    <div class="input-group">
+                        <input type="date" name="mutual_funds_end_date" class="form-control" id="mutual_funds_end_date" value="{{ investment.mutual_funds_end_date|default_if_none:''|date:'Y-m-d' }}">
+                    </div>
+                </div>
+            </div>
+
+            
+            <button type="submit" class="btn btn-primary">{{ investments_manage_page.btn.save_investments }}</button>
+        </form>
+
+    </div>
+
+</div>
+
+
+{% endblock %}

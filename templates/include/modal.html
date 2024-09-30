@@ -1,0 +1,127 @@
+<div class="modal fade" id="manageModal" tabindex="-1" aria-labelledby="manageModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Make a change in your finances</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+            {% if budget == 0 %}
+              <p class="text-center fs-4">
+                To begin, set your planned budget on the <a href="{% url 'budget' %}">Budget Page</a>
+              </p>
+            {% else %}
+            <form id="expensess-form" action="" class="row">
+
+              <div class="col-sm-10 m-auto">
+                <div class="d-flex justify-content-around income-text">
+                  <label for="basic-url" class="form-label">enter you income</label>
+                  <label for="basic-url" class="form-label">name yours income</label>
+                </div>
+    
+                <div class="input-group mb-3 income-input">
+                  <input name="income_once"type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" style="width:100px">
+                  <span class="input-group-text">$</span>
+                  <input name="income_description" type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" style="width:220px">
+                </div>
+    
+                <div class="d-flex justify-content-around expenses-text">
+                  <label for="basic-url" class="form-label">enter you expenses</label>
+                  <label for="basic-url" class="form-label">  name yours expenses</label>
+                </div>
+    
+                <div class="input-group expenses-input">
+                  <input name="expences_once"type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" style="width:100px">
+                  <span class="input-group-text">$</span>
+                  <input  name="expences_description" type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" style="width:220px">
+                </div>
+              </div>
+    
+            </form>
+            {% endif %}
+
+          </div>
+          <div class="modal-footer justify-content-end">
+            {% if budget != 0 %}
+              <button type="button" id="exspress-add" class="btn btn-primary">Save</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            {% endif %}
+          </div>
+      </div>
+  </div>
+</div>
+
+  </div>
+
+    <div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="helpModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                </div>
+                <h5 class="h5 text-center">Daily Tip</h5>
+                <div class="col-auto m-auto">
+                <i class="demo-icon icon-lightbulb " style="font-size: 30px;"></i>
+                </div>
+                <h5 class="text-center fs-3 font-monospace">
+              <p><br>Create a budget and stick to it. A budget is a plan for your income and expenses. It will help you understand where your money is going and will help you track your spending. Try to stick to your budget and avoid spontaneous purchases.</p>
+            </h5>
+            
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        $(document).ready(function() {
+          $('#exspress-add').on('click', function(e) {
+              e.preventDefault();
+
+              var formData = {
+                  income_once: $('input[name="income_once"]').val(),
+                  income_description: $('input[name="income_description"]').val(),
+                  expences_once: $('input[name="expences_once"]').val(),
+                  expences_description: $('input[name="expences_description"]').val(),
+              };
+      
+              $.ajax({
+                  url: '/exspress-add/',
+                  type: 'POST',
+                  data: formData,
+                  headers: {
+                      'X-CSRFToken': '{{ csrf_token }}'
+                  },
+                  success: function(response) {
+                    const budgetBalanceElement = $('#budget-balance');
+                    budgetBalanceElement.html('');
+      
+                    if (response.budget_balance < 0) {
+                        budgetBalanceElement.append(`
+                          <span class="badge bg-danger">-</span>
+                        <span class="text-danger mx-2">${response.budget_balance}</span>`
+                        );
+                    } else {
+                          budgetBalanceElement.append(`
+                            <span class="badge bg-success">+</span>
+                            <span class="text-success mx-2">${response.budget_balance}</span>`
+                          );
+                    }
+                    $('#manageModal').modal('hide');
+                    $('#expensess-form')[0].reset();
+                  },
+                  error: function(xhr, status, error) {
+                      alert('An error occurred: ' + error);
+                  }
+              });
+          });
+      });
+      
+      </script>

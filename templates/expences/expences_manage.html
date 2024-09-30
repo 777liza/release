@@ -1,0 +1,148 @@
+{% extends 'dashboard/index.html' %}
+
+{% block title %}
+    {{ expences_manage_page.title }}
+{% endblock %}
+
+{% block content %}
+<header class="row">
+    <div class="d-flex mt-3 mb-4 align-items-center">
+        <a href="{% url 'expences' %}" class="btn btn-outline-primary mb-3 me-4 mt-2 d-block"><i class="ti ti-arrow-back"></i></a>
+        <h1 class="m-0 pb-2">{{ expences_manage_page.h1 }}</h1>
+    </div>
+    <div class="col-auto">
+        <h3>{{ expences_manage_page.total_expenses }}: <span class="text-success">{% if total_expences %}{{ total_expences }}${% else %}0${% endif %}</span></h3>
+    </div>
+</header>
+
+<div class="row flex-grow-1">
+
+    <div class="col-lg-12 mt-4 mb-4">
+        <!-- <h3>{#% if form.total_expences %}Edit expences{% else %}Add expences{% endif %#}</h3> -->
+        <form method="post" class="col-lg-12 mb-3 mt-3">
+            {% csrf_token %} 
+           
+            <div class="row form-group">
+
+                <div class="mb-3 col-md-12">
+                    <h5>{{ expences_manage_page.base_expenses }}</h5>
+                </div>
+                
+                <div class="mb-3 col-md-2">
+                    <label for="inputZip" class="form-label">{{ expences_manage_page.amount }}</label>
+                    <div class="input-group">
+                        <input type="number" name="base_expences" class="form-control" id="base_expences" value="{{ form.base_expences.value }}">
+                        <span class="input-group-text">$</span>
+                    </div>
+                </div>
+
+                <div class="mb-3 col-md-6">
+                    <label for="base_expences_description" class="form-label">{{ expences_manage_page.base_expenses_description }}</label>
+                    <input type="text" name="base_expences_description" class="form-control" id="base_expences_description" value="{{ form.base_expences_description.value }}">
+                </div>
+    
+                <div class="mb-3 col-md-2">
+                    <label for="base_expences_start_date" class="form-label">{{ expences_manage_page.base_start }}</label>
+                    <input type="date" name="base_expences_start_date" class="form-control" id="base_expences_start_date" value="{{ form.base_expences_start_date.value|date:"Y-m-d" }}">
+                </div>
+
+                
+                <div class="mb-3 col-md-2">
+                    <label for="base_expences_end_date" class="form-label">{{ expences_manage_page.base_end }}</label>
+                    <input type="date" name="base_expences_end_date" class="form-control" id="base_expences_end_date" value="{{ form.base_expences_end_date.value|date:"Y-m-d" }}">
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+
+                <div class="mb-3 col-md-12">
+                    <h5>{{ expences_manage_page.additional_expenses }}</h5>
+                </div>
+                {# additional_expences  #}
+
+                <div class="additional-expences col-md-12 form-group" id="additional-expences-container">
+
+                    {% for additional_expences in additional_expences %}
+
+                        <div class="row">
+                            <div class="mb-3 col-md-2">
+                                <label for="additional_expences_{{ forloop.counter }}" class="form-label">{{ expences_manage_page.amount }}</label>
+                                <div class="input-group">
+                                    <input type="text" name="additional_expences[]" class="form-control" id="additional_expences_{{ forloop.counter }}" value="{{ additional_expences.amount }}">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label for="additional_expences_description_{{ forloop.counter }}" class="form-label">{{ expences_manage_page.additional_expenses_description }}</label>
+                                <input type="text" name="additional_expences_description[]" class="form-control" id="additional_expences_description_{{ forloop.counter }}" value="{{ additional_expences.description }}">
+                            </div>
+                            <div class="mb-3 col-md-2">
+                                <label for="additional_expences_start_{{ forloop.counter }}" class="form-label">{{ expences_manage_page.additional_start }}</label>
+                                <input type="date" name="additional_expences_start[]" class="form-control" id="additional_expences_start_{{ forloop.counter }}" value="{{ additional_expences.start_date }}">
+                            </div>
+                            <div class="mb-3 col-md-2">
+                                <label for="additional_expences_end_{{ forloop.counter }}" class="form-label">{{ expences_manage_page.additional_end }}</label>
+                                <input type="date" name="additional_expences_end[]" class="form-control" id="additional_expences_end_{{ forloop.counter }}" value="{{ additional_expences.end_date }}">
+                            </div>
+    
+                        </div>
+                    
+                    {% endfor %}
+
+                </div>
+
+                <div class="col-4">
+                    <button type="button" id="add-expences-button" class="btn btn-secondary">{{ expences_manage_page.btn.add_additional_expenses }}</button>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="col-md-12" >
+
+                <div class="mb-3 col-md-12">
+                    <h5>{{ expences_manage_page.one_time_expenses }}</h5>
+                </div>
+            
+                <div class="one-time-expences-container" id="one-time-expences-container">
+                    {% for one_time_expences in one_time_expences %}
+                    <div class="row one-time-expences-group">
+                        <div class="mb-3 col-md-2">
+                            <label for="one_time_expences_{{ forloop.counter }}" class="form-label">{{ expences_manage_page.amount }}</label>
+                            <div class="input-group">
+                                <input type="text" name="one_time_expences[]" class="form-control" id="one_time_expences_{{ forloop.counter }}" value="{{ one_time_expences.amount }}">
+                                <span class="input-group-text">$</span>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="one_time_expences_description_{{ forloop.counter }}" class="form-label">{{ expences_manage_page.one_time_expenses_description }}</label>
+                            <input type="text" name="one_time_expences_description[]" class="form-control" id="one_time_expences_description_{{ forloop.counter }}" value="{{ one_time_expences.description }}">
+                        </div>
+                        <div class="mb-3 col-md-2">
+                            <label for="one_time_expences_start_{{ forloop.counter }}" class="form-label">{{ expences_manage_page.one_time_start }}</label>
+                            <input type="date" name="one_time_expences_start[]" class="form-control" id="one_time_expences_start_{{ forloop.counter }}" value="{{ one_time_expences.start_date }}">
+                        </div>
+                        <div class="mb-3 col-md-2">
+                            <label for="one_time_expences_end_{{ forloop.counter }}" class="form-label">{{ expences_manage_page.one_time_end }}</label>
+                            <input type="date" name="one_time_expences_end[]" class="form-control" id="one_time_expences_end_{{ forloop.counter }}" value="{{ one_time_expences.end_date }}">
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="col-4">
+                    <button type="button" id="add-one-time-expences-button" class="btn btn-secondary">{{ expences_manage_page.btn.add_one_time_expenses }}</button>
+                </div>
+                
+            </div>
+
+            <hr>
+    
+            <button type="submit" class="btn btn-primary">{{ expences_manage_page.btn.save_expenses }}</button>
+    </div>
+
+        </form>
+    
+</div>
+{% endblock %}

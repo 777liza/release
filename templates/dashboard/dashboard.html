@@ -1,0 +1,91 @@
+{% extends 'dashboard/index.html' %} 
+ {% load static %}
+
+  <!--  Row 1 --> 
+  {% block title %}
+    {{ dashboard_page.title }}
+  {% endblock %}
+
+  {% block content %}
+
+  <header class="row">
+    <div class="d-flex mt-3 mb-4 align-items-center">
+        <span class="btn btn-outline-primary mb-3 me-4 mt-2 d-block"><i class="ti ti-layout-dashboard"></i></span>
+        <h1 class="m-0 pb-2">{{ dashboard_page.h1 }}</h1>
+    </div>
+    <div class="col-auto">
+        <h3>{{ dashboard_page.total_income }} <span class="text-success"> {% if total_income %} {{ total_income }}${% else %}0${% endif %}</span></h3>
+    </div>
+    <div class="col-lg-12">
+      <h3>{{ dashboard_page.total_expences }} <span class="text-success"> {% if total_expences %} -{{ total_expences }}$ {% else %}0${% endif %}</span></h3>
+  </div>
+  <div class="col-auto">
+    <h3>{{ dashboard_page.total_investments }}<span class="text-success"> {% if total_investments %}{{ total_investments }}$ {% else %}0${% endif %}</span></h3>
+</div>
+</header>
+
+<hr>
+
+<div class="row flex-grow-1">
+  <div class="col-lg-12">
+    <h3>{{ dashboard_page.income }}</h3>
+    <div class="row mb-3">
+      <div class="col-lg-8">{% include 'include/transaction-income.html' %}</div>
+      <div class="col-lg-4">
+        {% include 'include/montlyearning.html' with name_id='additional' title=dashboard_page.w.additional_income data_charts='[25, 46, 20, 40, 12, 58, 20]' %}
+        {% include 'include/montlyearning.html' with name_id='one_time' title=dashboard_page.w.one_time_income data_charts='[25, 16, 20, 40, 22, 68, 30]' %} 
+      </div>
+    </div>
+  </div>
+  <div class="col-auto"><a href="{% url 'income_manage' %}" class="btn btn-outline-primary">{{ dashboard_page.btn.manage_income }}</a></div>
+</div>
+
+<hr>
+
+<div class="row mb-3">
+  <div class="col-lg-12">
+    <h3>{{ dashboard_page.investments }}</h3>
+    <div class="row">
+      <div class="col-lg-8">{% include 'include/transaction-invest.html' with text=dashboard_page.w %}</div>
+      <div class="col-lg-4">
+        {% include 'include/montlyearning.html' with name_id='investments-actives' title=dashboard_page.w.total_investments data_charts='[30, 46, 21, 41, 14, 48, 35]' %}
+        {% include 'include/montlyearning.html' with name_id='investments' title=dashboard_page.w.margin_investments data_charts='[25, 66, 20, 40, 12, 48, 30]' %}
+      <div>
+      
+    </div>
+  </div>
+  <div class="col-auto"><a href="{% url 'investments' %}" class="btn btn-outline-primary">{{ dashboard_page.btn.manage_investments }}</a></div>
+</div>
+
+<hr>
+
+<div class="row mb-3">
+  <div class="col-lg-12">
+    <h3>{{ dashboard_page.expences }}</h3>
+    <div class="row">
+      <div class="col-lg-8">{% include 'include/transaction-expences.html' with text=dashboard_page.w %}</div>
+      <div class="col-lg-4">
+        {% include 'include/montlyearning.html' with name_id='expences' title=dashboard_page.w.additional_expences data_charts='[5, 66, 20, 40, 12, 58, 20]' %}
+        {% include 'include/montlyearning.html' with name_id='additional_expences' title=dashboard_page.w.one_time_expences data_charts='[75, 66, 20, 40, 12, 58, 25]' %}
+      </div>
+    </div>
+  </div>
+  <div class="col-auto"><a href="{% url 'expences' %}" class="btn btn-outline-primary">{{ dashboard_page.btn.manage_expences }}</a></div>
+</div> 
+
+{% endblock %}
+
+{% block 'charts_data' %}
+  <script>  
+    jQuery(document).ready(function() {
+      charts( 'one_time', '#13deb978', 'Earnings' );
+      charts( 'additional', '#13deb978', 'Earnings' );
+
+      charts( 'investments-actives', '#49beff73', 'Earnings' );
+      charts( 'investments', '#49beff73', 'Earnings' );
+
+      charts( 'expences', '#f16a6a9e', 'Earnings' );
+      charts( 'additional_expences', '#f16a6a9e', 'Earnings' );
+    }); 
+</script>
+{% endblock %}

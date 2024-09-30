@@ -1,0 +1,46 @@
+<div class="col-lg-12 d-flex align-items-stretch pading-class expences">
+    <div class="card w-100">
+        <div class="card-body background-expneces">
+            <h5 class=" card-title fw-semibold mb-4">{{ text.recent_expenses }}</h5>
+            <div class="table-responsive p-4">
+                <table class="table text-nowrap mb-0 align-middle">
+                    <thead class="text-dark fs-4">
+                        <tr>
+                            <th><h6 class="fw-semibold mb-0">{{ text.amount_expenses }}</h6></th>
+                            <th><h6 class="fw-semibold mb-0">{{ text.description_expenses }}</h6></th>
+                            <th><h6 class="fw-semibold mb-0">{{ text.recent_date_expenses }}</h6></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><h6 class="fw-semibold mb-0">{{ text.additional_expenses }}</h6></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        {% for expences in expences_data %}
+                        {% for additional_expences in expences.additional_expences %}
+                        <tr>
+                            <td>{{ additional_expences.amount }}</td>
+                            <td>{{ additional_expences.description }}</td>
+                            <td>{{ additional_expences.start_date }}</td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td><h6 class="fw-semibold mb-0">{{ text.one_time_expenses }}</h6></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        {% for one_time_expences in expences.one_time_expences %}
+                        <tr>
+                            <td>{{ one_time_expences.amount }}</td>
+                            <td>{{ one_time_expences.description }}</td>
+                            <td>{{ one_time_expences.start_date }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
