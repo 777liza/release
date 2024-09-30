@@ -6,9 +6,9 @@ With a clear overview of your financial health, you can confidently achieve your
 You can control your: income, expenses, different types of investments. Set a budget and make sure that expenses do not exceed it.
 ## Screenshots
 
-![Image of screenshot1](Screenshots/screenshots1.png)
-![Image of screenshot2](Screenshots/screenshots2.png)
-![Image of screenshot3](Screenshots/screenshots3.png)
+![Image of screenshot1](Screenshots/screenshot1.png)
+![Image of screenshot2](Screenshots/screenshot2.png)
+![Image of screenshot3](Screenshots/screenshot3.png)
 
 ## Install
 
