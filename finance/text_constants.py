@@ -1,3 +1,11 @@
+SITE_TEXT = {
+    'update_balance' : 'Update balance',
+    'my_profile' : 'My Profile',
+    'admin_panel' : 'Admin Panel',
+    'help' : 'Help',
+    'logout' : 'Logout',
+}
+
 DASHBOARD_PAGE = {
     'title' : 'Dashboard',
     'h1' : 'Dashboard',
@@ -41,7 +49,6 @@ DASHBOARD_PAGE = {
         'manage_expences' : 'Manage Expenses',
     }
 }
-
 BUDGET_PAGE = {
     'title' : 'Manage your budget',
     'h1' : 'Manage Your Budget here',

@@ -66,9 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-MIDDLEWARE = [
-    ...
-    'monitor.middleware.AdminMessageMiddleware',
+    #'monitor.middleware.AdminMessageMiddleware',
 ]
 
 MAX_SITE_SIZE = 10 * 1024 * 1024  # 10 MB
@@ -103,6 +101,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'finance.context_processors.global_text_constants',
                 'dashboard.context_processors.budget_balance',
                 'dashboard.context_processors.site_theme',
             ],
@@ -120,10 +119,10 @@ DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'finance',
-        'USER': 'root',
+        'USER': '',
         'PASSWORD': '',
         'HOST': 'localhost',
-        'PORT': '3306',
+        'PORT': '',
     }
 }
 

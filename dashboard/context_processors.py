@@ -13,7 +13,10 @@ def budget_balance(request):
         budget_balance = None
         budget = 0
 
-    return {'budget_balance': budget_balance, 'budget': budget}
+    return {
+        'budget_balance': budget_balance,
+        'budget': budget
+    }
 
 def site_theme(request):
     if request.user.is_authenticated:
