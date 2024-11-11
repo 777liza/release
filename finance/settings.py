@@ -117,7 +117,7 @@ WSGI_APPLICATION = 'finance.wsgi.application'
 
 DATABASES = {
      'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'jango.db.backends.postgresql',
         'NAME': 'finance',
         'USER': '',
         'PASSWORD': '',
