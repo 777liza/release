@@ -11,45 +11,50 @@
     <div class="col-md-8 col-lg-6 col-xxl-3">
         <div class="card mb-0">
             <div class="card-body">
-
-                <a href="{% url 'home_page' %}" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                    <img src="{% static '/svg/logo.svg' %}" width="200px" alt="" class="light-logo ml-0"/>
+                <a href="{% url 'home_page' %}" class="text-nowrap logo-img text-center d-block py-3 w-100" aria-label="Home Page">
+                    <img src="{% static '/svg/logo.svg' %}" width="200px" alt="Site Logo" class="light-logo ml-0" />
                 </a>
 
-                <form method="post">
+                <form method="post" aria-labelledby="signup-form">
                     {% csrf_token %}
                     
                     {% if messages %}
-                        <ul class="alert alert-danger">
-                            {% for message in messages %}
-                            <li>{{ message }}</li>
-                            {% endfor %}
-                        </ul>
+                        <div class="alert alert-danger" role="alert">
+                            <ul>
+                                {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     {% endif %}
 
                     <div class="mb-3">
                         <label for="id_username" class="form-label">Username</label>
-                        <input type="text" name="username" class="form-control" id="id_username" aria-describedby="usernameHelp">
+                        <input type="text" name="username" class="form-control" id="id_username" aria-describedby="usernameHelp" aria-required="true">
+                        <div id="usernameHelp" class="form-text">Your unique username for signing in.</div>
                     </div>
                     <div class="mb-3">
                         <label for="id_password1" class="form-label">Password*</label>
-                        <input type="password" name="password1" class="form-control" id="id_password1">
+                        <input type="password" name="password1" class="form-control" id="id_password1" aria-required="true" aria-describedby="passwordHelp">
+                        <div id="passwordHelp" class="form-text">Use a strong password for security.</div>
                     </div>
                     <div class="mb-3">
                         <label for="id_password2" class="form-label">Confirm Password</label>
-                        <input type="password" name="password2" class="form-control" id="id_password2">
+                        <input type="password" name="password2" class="form-control" id="id_password2" aria-required="true">
                     </div>
                     <div class="mb-3">
                         <label for="id_email" class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control" id="id_email">
+                        <input type="email" name="email" class="form-control" id="id_email" aria-required="true">
                     </div>
                     <div class="d-flex align-items-center justify-content-center mb-4">
                         <a class="text-primary fw-bold" href="{% url 'login' %}">Already have an account? Log in</a>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign Up</button>
+                    <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" aria-label="Sign up button">Sign Up</button>
                 </form>
-                <p class="note">
-                    *Your password must be at least 12 characters long and contain a mix of uppercase and lowercase letters, numbers, and special characters. <br>Do not use your username or easily guessable words as your password.
+
+                <p class="note" id="password-requirements" aria-live="polite">
+                    *Your password must be at least 12 characters long and contain a mix of uppercase and lowercase letters, numbers, and special characters. <br>
+                    Do not use your username or easily guessable words as your password.
                 </p>
             </div>
         </div>

@@ -8,69 +8,57 @@
 
 <header class="row">
     <div class="d-flex mt-3 mb-4 align-items-center">
-        <a href="{% url 'income' %}" class="btn btn-outline-primary mb-3 me-4 mt-2 d-block"><i class="ti ti-arrow-back"></i></a>
-        <h1 class="m-0 pb-2">{{income_manage_page.h1 }}</h1>
+        <a href="{% url 'income' %}" class="btn btn-outline-primary mb-3 me-4 mt-2 d-block" aria-label="Вернуться к списку доходов"><i class="ti ti-arrow-back"></i></a>
+        <h1 class="m-0 pb-2" id="income-page-title">{{ income_manage_page.h1 }}</h1>
     </div>
     <div class="col-auto">
-        <h3>{{income_manage_page.total_income }} <span class="text-success">{% if total_income %}{{ total_income }}${% else %}0${% endif %}</span></h3>
+        <h3 aria-live="polite" aria-atomic="true">{{ income_manage_page.total_income }} <span class="text-success">{% if total_income %}{{ total_income }}${% else %}0${% endif %}</span></h3>
     </div>
 </header>
 
 <div class="row flex-grow-1">
-
     <div class="col-lg-12 mt-4 mb-4">
-        <!-- <h3>{#% if form.total_income %}Edit Income{% else %}Add Income{% endif %#}</h3> -->
-        
-        <form method="post" class="col-lg-12 mb-3 mt-3">
-            {% csrf_token %} 
-           
-            <div class="row form-group">
+        <form method="post" class="col-lg-12 mb-3 mt-3" aria-labelledby="income-page-title">
+            {% csrf_token %}
 
-                <div class="mb-3 col-md-12">
-                    <h5>{{ income_manage_page.base_income }}</h5>
-                </div>
-                
-                <div class="mb-3 col-md-2">
-                    <label for="inputZip" class="form-label">{{ income_manage_page.base_income_amount }}</label>
-                    <div class="input-group">
-                        <input type="number" name="base_income" class="form-control" id="base_income" value="{{ form.base_income.value }}">
-                        <span class="input-group-text">$</span>
+            <fieldset>
+                <legend class="mb-3">{{ income_manage_page.base_income }}</legend>
+                <div class="row form-group">
+                    <div class="mb-3 col-md-2">
+                        <label for="base_income" class="form-label">{{ income_manage_page.base_income_amount }}</label>
+                        <div class="input-group">
+                            <input type="number" name="base_income" class="form-control" id="base_income" aria-describedby="base-income-help" value="{{ form.base_income.value }}">
+                            <span class="input-group-text">$</span>
+                        </div>
+                        <small id="base-income-help" class="form-text text-muted">Введите сумму базового дохода.</small>
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label for="base_income_description" class="form-label">{{ income_manage_page.base_income_description }}</label>
+                        <input type="text" name="base_income_description" class="form-control" id="base_income_description" value="{{ form.base_income_description.value }}">
+                    </div>
+
+                    <div class="mb-3 col-md-2">
+                        <label for="base_income_start_date" class="form-label">{{ income_manage_page.base_income_start }}</label>
+                        <input type="date" name="base_income_start_date" class="form-control" id="base_income_start_date" value="{{ form.base_income_start_date.value|date:"Y-m-d" }}">
+                    </div>
+
+                    <div class="mb-3 col-md-2">
+                        <label for="base_income_end_date" class="form-label">{{ income_manage_page.base_income_end }}</label>
+                        <input type="date" name="base_income_end_date" class="form-control" id="base_income_end_date" value="{{ form.base_income_end_date.value|date:"Y-m-d" }}">
                     </div>
                 </div>
-
-                <div class="mb-3 col-md-6">
-                    <label for="base_income_description" class="form-label">{{ income_manage_page.base_income_description }}</label>
-                    <input type="text" name="base_income_description" class="form-control" id="base_income_description" value="{{ form.base_income_description.value }}">
-                </div>
-    
-                <div class="mb-3 col-md-2">
-                    <label for="base_income_start_date" class="form-label">{{income_manage_page.base_income_start }}</label>
-                    <input type="date" name="base_income_start_date" class="form-control" id="base_income_start_date" value="{{ form.base_income_start_date.value|date:"Y-m-d" }}">
-                </div>
-
-                
-                <div class="mb-3 col-md-2">
-                    <label for="base_income_end_date" class="form-label">{{income_manage_page.base_income_end }}</label>
-                    <input type="date" name="base_income_end_date" class="form-control" id="base_income_end_date" value="{{ form.base_income_end_date.value|date:"Y-m-d" }}">
-                </div>
-            </div>
+            </fieldset>
 
             <hr>
 
-            <div class="row">
-
-                <div class="mb-3 col-md-12">
-                    <h5>{{income_manage_page.additional_income }}</h5>
-                </div>
-                {# additional_incomes  #}
-
-                <div class="additional-income col-md-12 form-group" id="additional-income-container">
-
+            <fieldset>
+                <legend class="mb-3">{{ income_manage_page.additional_income }}</legend>
+                <div id="additional-income-container">
                     {% for additional_income in additional_incomes %}
-
-                        <div class="row">
+                        <div class="row additional-income-group" role="group" aria-labelledby="additional-income-{{ forloop.counter }}">
                             <div class="mb-3 col-md-2">
-                                <label for="additional_income_{{ forloop.counter }}" class="form-label">{{income_manage_page.additional_income_amount }}</label>
+                                <label for="additional_income_{{ forloop.counter }}" class="form-label">{{ income_manage_page.additional_income_amount }}</label>
                                 <div class="input-group">
                                     <input type="text" name="additional_income[]" class="form-control" id="additional_income_{{ forloop.counter }}" value="{{ additional_income.amount }}">
                                     <span class="input-group-text">$</span>
@@ -88,66 +76,48 @@
                                 <label for="additional_income_end_{{ forloop.counter }}" class="form-label">{{ income_manage_page.additional_income_end }}</label>
                                 <input type="date" name="additional_income_end[]" class="form-control" id="additional_income_end_{{ forloop.counter }}" value="{{ additional_income.end_date }}">
                             </div>
-    
                         </div>
-                    
                     {% endfor %}
-
                 </div>
-
-                <div class="col-4">
-                    <button type="button" id="add-income-button" class="btn btn-secondary">{{income_manage_page.btn.additional_income_add_btn }}</button>
-                </div>
-
-
-            </div>
+                <button type="button" id="add-income-button" class="btn btn-secondary" aria-label="Добавить дополнительный доход">{{ income_manage_page.btn.additional_income_add_btn }}</button>
+            </fieldset>
 
             <hr>
 
-            <div class="col-md-12" >
-
-                <div class="mb-3 col-md-12">
-                    <h5>{{income_manage_page.one_time_income }}</h5>
-                </div>
-            
-                <div class="one-time-income-container" id="one-time-income-container">
+            <fieldset>
+                <legend class="mb-3">{{ income_manage_page.one_time_income }}</legend>
+                <div id="one-time-income-container">
                     {% for one_time_income in one_time_incomes %}
-                    <div class="row one-time-income-group">
-                        <div class="mb-3 col-md-2">
-                            <label for="one_time_income_{{ forloop.counter }}" class="form-label">{{ income_manage_page.one_time_income_amount }}</label>
-                            <div class="input-group">
-                                <input type="text" name="one_time_income[]" class="form-control" id="one_time_income_{{ forloop.counter }}" value="{{ one_time_income.amount }}">
-                                <span class="input-group-text">$</span>
+                        <div class="row one-time-income-group" role="group" aria-labelledby="one-time-income-{{ forloop.counter }}">
+                            <div class="mb-3 col-md-2">
+                                <label for="one_time_income_{{ forloop.counter }}" class="form-label">{{ income_manage_page.one_time_income_amount }}</label>
+                                <div class="input-group">
+                                    <input type="text" name="one_time_income[]" class="form-control" id="one_time_income_{{ forloop.counter }}" value="{{ one_time_income.amount }}">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label for="one_time_income_description_{{ forloop.counter }}" class="form-label">{{ income_manage_page.one_time_income_description }}</label>
+                                <input type="text" name="one_time_income_description[]" class="form-control" id="one_time_income_description_{{ forloop.counter }}" value="{{ one_time_income.description }}">
+                            </div>
+                            <div class="mb-3 col-md-2">
+                                <label for="one_time_income_start_{{ forloop.counter }}" class="form-label">{{ income_manage_page.one_time_income_start }}</label>
+                                <input type="date" name="one_time_income_start[]" class="form-control" id="one_time_income_start_{{ forloop.counter }}" value="{{ one_time_income.start_date }}">
+                            </div>
+                            <div class="mb-3 col-md-2">
+                                <label for="one_time_income_end_{{ forloop.counter }}" class="form-label">{{ income_manage_page.one_time_income_end }}</label>
+                                <input type="date" name="one_time_income_end[]" class="form-control" id="one_time_income_end_{{ forloop.counter }}" value="{{ one_time_income.end_date }}">
                             </div>
                         </div>
-                        <div class="mb-3 col-md-6">
-                            <label for="one_time_income_description_{{ forloop.counter }}" class="form-label">{{ income_manage_page.one_time_income_description }}</label>
-                            <input type="text" name="one_time_income_description[]" class="form-control" id="one_time_income_description_{{ forloop.counter }}" value="{{ one_time_income.description }}">
-                        </div>
-                        <div class="mb-3 col-md-2">
-                            <label for="one_time_income_start_{{ forloop.counter }}" class="form-label">{{ income_manage_page.one_time_income_start }}</label>
-                            <input type="date" name="one_time_income_start[]" class="form-control" id="one_time_income_start_{{ forloop.counter }}" value="{{ one_time_income.start_date }}">
-                        </div>
-                        <div class="mb-3 col-md-2">
-                            <label for="one_time_income_end_{{ forloop.counter }}" class="form-label">{{ income_manage_page.one_time_income_end }}</label>
-                            <input type="date" name="one_time_income_end[]" class="form-control" id="one_time_income_end_{{ forloop.counter }}" value="{{ one_time_income.end_date }}">
-                        </div>
-                    </div>
                     {% endfor %}
                 </div>
-                <div class="col-4">
-                    <button type="button" id="add-one-time-income-button" class="btn btn-secondary">{{ income_manage_page.btn.one_time_income_add_btn }}</button>
-                </div>
-                
-            </div>
+                <button type="button" id="add-one-time-income-button" class="btn btn-secondary" aria-label="Добавить единоразовый доход">{{ income_manage_page.btn.one_time_income_add_btn }}</button>
+            </fieldset>
 
             <hr>
-            <button type="submit" class="btn btn-primary">{{ income_manage_page.btn.save_income }}</button>
-    </div>
-
+            <button type="submit" class="btn btn-primary" aria-label="Сохранить доход">{{ income_manage_page.btn.save_income }}</button>
         </form>
-    
+    </div>
 </div>
-
 
 {% endblock %}

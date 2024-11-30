@@ -20,7 +20,7 @@
    
         <div class="col-lg-12 mt-4 mb-4">
            
-            {% if user.is_staff %}
+            {#% if user.is_staff %}
            
                 <h3 class="mb-3">List of Messages</h3>
 
@@ -37,7 +37,7 @@
                     <p>No messages.</p>
                 {% endif %}
            
-            {% else %}
+            {#% else %}
 
                 <form method="post">
                     {% csrf_token %}
@@ -54,7 +54,7 @@
                     <button type="submit" class="btn btn-primary">{{ contact_us_page.btn.send_message }}</button>
                 </form>
 
-            {% endif %}
+            {#% endif %}
 
         </div>
     </div>

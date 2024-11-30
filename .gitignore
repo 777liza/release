@@ -26,7 +26,7 @@ __pycache__/
 
 # Distribution / packaging
 .eggs/
-dist/
+# dist/
 build/
 develop-eggs/
 eggs/
