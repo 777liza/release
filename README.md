@@ -1,5 +1,8 @@
 # Budget Tracker
 
+🎉 2025 New Year, New Feature: Banking Section 🚀
+As we step into the new year, we're excited to introduce a brand-new Banking section in our budget tracker! This feature will allow users to manage their bank accounts, track balances, and gain better control over their financial health.
+
 ## Description
 Budget Tracker is your ultimate tool for managing personal finances. Our platform helps you easily track income, monitor expenses, and optimize investments. 
 With a clear overview of your financial health, you can confidently achieve your financial goals.
