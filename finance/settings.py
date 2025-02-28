@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'income',
     'investments',
     'expences',
+    'banking',
 ]
 
 
@@ -117,8 +118,8 @@ WSGI_APPLICATION = 'finance.wsgi.application'
 
 DATABASES = {
      'default': {
-        'ENGINE': 'jango.db.backends.postgresql',
-        'NAME': 'finance',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': '',
         'USER': '',
         'PASSWORD': '',
         'HOST': 'localhost',

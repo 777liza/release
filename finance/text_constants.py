@@ -49,6 +49,19 @@ DASHBOARD_PAGE = {
         'manage_expences' : 'Manage Expenses',
     }
 }
+BANKING_PAGE = {
+    'title' : 'information about your bank accounts',
+    'h1' : 'Manage Your Bank Accounts Here', 
+    'current_budget' : 'Current budget',
+    'date_start' : 'Start Date',
+    'date_end' : 'End Date',
+    'set_budget' : 'Enter your budget and the period it applies to.',
+    'budget' : 'Budget',
+    'btn' : {
+        'save': 'save',
+    },
+}
+
 BUDGET_PAGE = {
     'title' : 'Manage your budget',
     'h1' : 'Manage Your Budget here',
